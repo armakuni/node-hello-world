@@ -16,6 +16,19 @@ describe('Express App', () => {
     });
   });
 
+  describe('GET /hello/fred', () => {
+    it('should return HTML with centered Hello World text', async () => {
+      const response = await request(app).get('/hello/fred');
+
+      expect(response.status).toBe(200);
+      expect(response.text).toContain('<!DOCTYPE html>');
+      expect(response.text).toContain('<h1>Hello fred</h1>');
+      expect(response.text).toContain('display: flex');
+      expect(response.text).toContain('justify-content: center');
+      expect(response.text).toContain('font-size: 3rem');
+    });
+  });
+
   describe('GET /hello', () => {
     it('should return HTML with centered Hello World text', async () => {
       const response = await request(app).get('/hello');
