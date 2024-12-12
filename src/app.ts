@@ -1,5 +1,6 @@
 import express, { Express, Request, Response } from 'express';
 import path from 'path';
+import { homePageContent } from './homePageContent';
 
 export const createApp = (): Express => {
   const app = express();
@@ -9,37 +10,18 @@ export const createApp = (): Express => {
 
   // Root route
   app.get('/', (_req: Request, res: Response) => {
-    res.send(`
-      <!DOCTYPE html>
-      <html lang="en">
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Image Page</title>
-          <style>
-            body {
-              margin: 0;
-              height: 100vh;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-            }
-            img {
-              max-width: 100%;
-              height: auto;
-            }
-          </style>
-        </head>
-        <body>
-          <img src="/img/ak.png" alt="Centered Image">
-        </body>
-      </html>
-    `);
+    res.send(homePageContent());
   });
 
   // Hello route
   app.get('/hello', (_req: Request, res: Response) => {
-    res.send(`
+    res.send(helloContent());
+  });
+
+  return app;
+};
+function helloContent(): any {
+  return `
       <!DOCTYPE html>
       <html lang="en">
         <head>
@@ -62,8 +44,5 @@ export const createApp = (): Express => {
           <h1>Hello World</h1>
         </body>
       </html>
-    `);
-  });
-
-  return app;
-};
+    `;
+}
